@@ -1,6 +1,6 @@
 {
   "name": "generic-data-table",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc --emitDeclarationOnly && tsup"
+    "build": "tsup && tsc --emitDeclarationOnly --outDir ./dist"
   },
   "keywords": [
     "react",
