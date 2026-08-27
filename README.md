@@ -1,36 +1,116 @@
 # GenericDataTable
 
-`GenericDataTable` is a highly customizable, type-safe data table component built on top of Mantine UI. Designed specifically for complex enterprise workflows, it bridges the gap between structured tabular display and dynamic inline cell editing.
+`GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
 ---
 
-## Core Purpose
+## Installation
 
-In applications managing transactional records—such as purchasing, invoicing, and inventory settlements—users frequently need to alternate between reviewing structured data and quickly modifying cell values. 
+```bash
+npm install generic-data-table
+# or
+pnpm add generic-data-table
+```
 
-`GenericDataTable` standardizes table behavior across your application by providing:
-* **Strict Type Safety:** Fully typed column definitions and data models preventing runtime field reference bugs.
-* **Inline Editable Fields:** Seamless toggling between static read-only presentation and interactive input components per column.
-* **Keyboard-Driven Workflows:** Excel-like keyboard navigation (such as pressing `Enter` to commit shifts or trigger actions).
-* **Row-Level Transformations:** Centralized hooks to normalize, recalculate, or transform row state upon cell edits before committing changes.
+*(Note: Ensure your host project has `@mantine/core`, `@mantine/hooks`, and `react` / `react-dom` installed as peer dependencies.)*
 
 ---
 
-## Features Breakdown
+## Current Features (Basic Version)
 
-### 1. Flexible Column Definitions (`ColumnDefinition`)
-Extends standard table column properties to support dynamic rendering and custom edit states.
+* **Strict Type Safety:** Generic architecture (`<T>`) matching your data models seamlessly.
+* **Serial Number Integration:** Optional automatic index numbering column (`showSerialNumber`).
+* **Loading Skeletons:** Built-in animated skeleton rows activated via `isLoading`.
+* **Explicit Empty State:** Graceful fallback messaging when data arrays are empty.
+* **Cell Styling Hooks:** Custom per-cell background and text coloring via `cellBgColor` and `cellTextColor` accessor callbacks.
+* **Sticky Header & Scroll Area:** Scrollable container with fixed table headers for large datasets.
 
-* **`key` / `accessorKey`:** Strongly-typed property path pointing to the data field in your row object.
-* **`render`:** Custom render function for standard read-only view.
-* **`renderEdit`:** Specialized render function for edit mode. Allows embedding input components like Mantine's `TextInput`, `NumberInput`, `Select`, or `DatePickerInput` directly inside cells.
-* **`header`:** Label or custom JSX element rendered in the table header.
-* **`width` / `minWidth` / `maxWidth`:** Fine-grained sizing controls for responsive table layouts.
+---
 
-### 2. Custom Edit Controls (`renderEdit`)
-Allows turning any cell into an inline input control. When a row enters edit mode, `renderEdit` provides access to the current row instance, field value, and update handlers:
+## Quick Start Example
+
+Below is an example of how to implement the basic version of `GenericDataTable` using the current props:
 
 ```tsx
-renderEdit: ({ value, onChange, row }) => (
-  <NumberInput autoFocus min="{0}" onChange="{onChange}" precision="{2}" value="{value}"/>
-)
+import { GenericDataTable, ColumnDefinition } from 'generic-data-table';
+import { Badge } from '@mantine/core';
+
+interface UserRow {
+  id: number;
+  name: string;
+  role: string;
+  status: 'Active' | 'Inactive';
+}
+
+const data: UserRow[] = [
+  { id: 1, name: 'Alice Smith', role: 'Developer', status: 'Active' },
+  { id: 2, name: 'Bob Jones', role: 'Designer', status: 'Inactive' },
+];
+
+const columns: ColumnDefinition<UserRow>[] = [
+  {
+    label: 'Name',
+    accessor: (row) => row.name,
+  },
+  {
+    label: 'Role',
+    accessor: (row) => row.role,
+  },
+  {
+    label: 'Status',
+    accessor: (row) => (
+      <Badge 'Active' 'gray'} 'green' : ? color="{row.status">
+        {row.status}
+      </Badge>
+    ),
+    // Optional per-cell styling example
+    cellBgColor: (row) => (row.status === 'Active' ? '#f4fcf4' : undefined),
+  },
+];
+
+export function App() {
+  return (
+    <GenericDataTable<UserRow>
+      tableName="User Directory"
+      data={data}
+      columns={columns}
+      showSerialNumber={true}
+      maxHeight={400}
+      isLoading={false}
+    />
+  );
+}
+```
+
+---
+
+## API Reference (`GenericDataTableProps`)
+
+| Prop Name | Type | Description |
+| :--- | :--- | :--- |
+| `tableName` | `string` | Renders a styled header title banner above the table. Pass `""` to omit. |
+| `data` | `T[]` | Array of row data objects. |
+| `columns` | `ColumnDefinition<T>[]` | Configuration array defining table headers and accessors. |
+| `showSerialNumber` | `boolean` (optional) | Automatically prepends an incremental "SrNo" index column. |
+| `isLoading` | `boolean` (optional) | Toggles animated skeleton loader placeholders. |
+| `maxHeight` | `number \| string` (optional) | Sets the vertical scroll viewport ceiling via Mantine's `ScrollArea`. |
+
+### `ColumnDefinition<T>`
+* `label`: `string` — Header text label.
+* `accessor`: `(item: T) => ReactNode` — Data accessor rendering cell contents.
+* `cellBgColor?: (item: T) => string \| undefined` — Dynamic background color resolver per cell.
+* `cellTextColor?: (item: T) => string \| undefined` — Dynamic text color resolver per cell.
+
+---
+
+## Roadmap & Planned Features
+
+### 🚀 Coming Soon
+* **Row Interactivity:** `onRow` / `onRowsSelect` event handlers for selection and row-click workflows.
+* **Generic Action Column:** Built-in configuration slots for row-level buttons.
+* **Row Highlighting:** `getRowBgColor` prop for whole-row status coloring.
+
+### 🗺️ Future Roadmap
+* **Native Table Export:** Integrated toolbar menu supporting direct Excel and PDF data exports.
+* **Client-Side Sorting:** Ascending and descending sort toggles per column header.
+* **Global Search & Filtering:** Built-in search input for real-time row filtering across data fields.
