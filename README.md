@@ -14,6 +14,16 @@ pnpm add generic-data-table
 
 *(Note: Ensure your host project has `@mantine/core`, `@mantine/hooks`, and `react` / `react-dom` installed as peer dependencies.)*
 
+> **IMPORTANT FOR VITE USERS:** If you encounter a `MantineProvider was not found` error when using this component in a Vite-powered application, you must exclude the package from Vite's pre-bundling optimization so it shares your app's React context:
+> ```ts
+> // vite.config.ts
+> export default defineConfig({
+>   optimizeDeps: {
+>     exclude: ['generic-data-table'],
+>   },
+> });
+> ```
+
 ---
 
 ## Current Features (Basic Version)
