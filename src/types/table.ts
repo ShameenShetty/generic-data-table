@@ -12,4 +12,14 @@ export interface GenericDataTableProps<T> {
     showSerialNumber?: boolean;
     isLoading?: boolean;
     maxHeight?: number;
+    theme?: DataTableTheme;
+}
+
+export interface DataTableTheme {
+  titleBgColor?: string;
+  titleTextColor?: string;
+  headerBgColor?: string;
+  headerTextColor?: string;
+  borderColor?: string;
+  stripedBgColor?: string;
 }

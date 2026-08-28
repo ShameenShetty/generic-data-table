@@ -2,6 +2,84 @@
 
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
+<table style="width: 100%; border: none; background: transparent;">
+  <tr>
+    <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
+      <img src="./images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
+    </td>
+    <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
+      <img src="./images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 50%; vertical-align: top; text-align: center; padding: 10px; font-style: italic;">
+      Default GenericDataTable example where we set custom table cell color according to Status value.
+    </td>
+    <td style="width: 50%; vertical-align: top; text-align: center; padding: 10px; font-style: italic;">
+      Example of GenericDataTable when <code>titleName</code> is explicitly set to an empty string, removing the header container.
+    </td>
+  </tr>
+</table>
+
+---
+
+## Theming & Customization
+
+`GenericDataTable` features a fully configurable `theme` prop (`DataTableTheme`), allowing you to override default table colors, borders, and headers to match your application's design system.
+
+![Custom Theme GenericDataTable Example](./images/data-table-custom-theme-example.png)
+*Custom blue theme applied via the `theme` prop.*
+
+```tsx
+import { GenericDataTable } from 'generic-data-table';
+import type { ColumnDefinition } from 'generic-data-table';
+
+interface UserRow {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}
+
+const columns: ColumnDefinition<UserRow>[] = [
+  {
+    label: 'Name',
+    accessor: (row) => row.name,
+  },
+  {
+    label: 'Role',
+    accessor: (row) => row.role,
+  },
+  {
+    label: 'Status',
+    accessor: (row) => row.status,
+    // Optional per-cell styling example
+    cellBgColor: (row) => (row.status === 'Active' ? '#A4D5A6' : 'lightgrey'),
+  },
+];
+
+export function UserDirectoryTable({ data }: { data: UserRow[] }) {
+  return (
+    <GenericDataTable<UserRow>
+      tableName="User Directory"
+      data={data}
+      columns={columns}
+      showSerialNumber={true}
+      maxHeight={400}
+      isLoading={false}
+      theme={{
+        titleBgColor: '#3B82F6',
+        titleTextColor: '#FFFFFF',
+        headerBgColor: '#2563EB',
+        headerTextColor: '#FFFFFF',
+        borderColor: '#1E3A8A',
+        stripedBgColor: '#DBEAFE',
+      }}
+    />
+  );
+}
+```
+
 ---
 
 ## Installation
@@ -68,13 +146,9 @@ const columns: ColumnDefinition<UserRow>[] = [
   },
   {
     label: 'Status',
-    accessor: (row) => (
-      <Badge 'Active' 'gray'} 'green' : ? color="{row.status">
-        {row.status}
-      </Badge>
-    ),
+    accessor: (row) => row.status,
     // Optional per-cell styling example
-    cellBgColor: (row) => (row.status === 'Active' ? '#f4fcf4' : undefined),
+    cellBgColor: (row) => (row.status === 'Active' ? '#A4D5A6' : 'lightgrey'),
   },
 ];
 

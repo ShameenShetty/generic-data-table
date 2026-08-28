@@ -5,15 +5,26 @@ import { useMemo } from 'react';
 export function GenericDataTable<T>({
     data,
     columns,
-    tableName,
-    showSerialNumber,
-    isLoading,
-    maxHeight
+    tableName = '',
+    showSerialNumber = false,
+    isLoading = false,
+    maxHeight,
+    theme = {}
 }: GenericDataTableProps<T>) {
+    // Fallback theme tokens mapping to your current design defaults
+    const colors = {
+        titleBgColor: theme.titleBgColor ?? '#A67B5B',
+        titleTextColor: theme.titleTextColor ?? '#212529',
+        headerBgColor: theme.headerBgColor ?? '#9C7A5B',
+        headerTextColor: theme.headerTextColor ?? '#212529',
+        borderColor: theme.borderColor ?? 'black',
+        stripedBgColor: theme.stripedBgColor ?? '#CFB595',
+    };
+
     const displayCols = useMemo(() => [
         ...(showSerialNumber ? [{ label: 'SrNo', accessor: () => '' }] : []),
         ...columns
-    ], []);
+    ], [showSerialNumber, columns]);
 
     const safeData = Array.isArray(data) ? data : [];
     const skeletonRowsCount = safeData.length > 0 ? safeData.length : 5;
@@ -21,18 +32,17 @@ export function GenericDataTable<T>({
 
     return (
         <Box mx="lg" my="md">
-            {/* Table name */}
             {tableName.length > 0 &&
                 <Center mb='sm'>
                     <Box
                         style={{
-                            backgroundColor: '#A67B5B',
+                            backgroundColor: colors.titleBgColor,
                             padding: '12px 22px',
                             borderRadius: '16px',
                             boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                         }}
                     >
-                        <Title order={2} c='#212529' style={{ fontWeight: 700, letterSpacing: '0.5px' }}>
+                        <Title order={2} c={colors.titleTextColor} style={{ fontWeight: 700, letterSpacing: '0.5px' }}>
                             {tableName}
                         </Title>
                     </Box>
@@ -43,46 +53,39 @@ export function GenericDataTable<T>({
                 <Table
                     layout='auto'
                     striped
-                    stripedColor='#CFB595'
+                    stripedColor={colors.stripedBgColor}
                     withTableBorder
-                    fz="lg"          // Upscales body content font sizes globally
-                    lh="xl"          // Balances vertical row distribution for larger typography
+                    fz="lg"
+                    lh="xl"
                     style={{ borderCollapse: 'separate', borderSpacing: 0 }}
                 >
-                    {/* Header section */}
-                    <Table.Thead bg='#9C7A5B'>
+                    <Table.Thead bg={colors.headerBgColor}>
                         <Table.Tr>
-                            {displayCols.map((colName, index) => {
-                                return (
-                                    <Table.Th
-                                        key={index}
-                                        c='#212529'
-                                        fw={700}
-                                        fz="lg" // Match body scale hierarchy
-                                        style={{
-                                            textAlign: 'left',
-                                            fontStyle: 'italic',
-                                            padding: '16px', // Extra internal structural padding for wider fonts
-                                            whiteSpace: 'nowrap',
-                                            position: 'sticky',
-                                            top: 0,
-                                            zIndex: 2,
-                                            backgroundColor: '#9C7A5B',
-
-                                            // Box-shadow variant keeps line placement consistent during composite rendering
-                                            boxShadow: 'inset 0 -2px 0 0 black, inset -1px 0 0 0 black, inset 1px 0 0 0 black, inset 0 2px 0 0 black',
-                                        }}
-                                    >
-                                        {colName.label}
-                                    </Table.Th>
-                                );
-                            })}
+                            {displayCols.map((colName, index) => (
+                                <Table.Th
+                                    key={index}
+                                    c={colors.headerTextColor}
+                                    fw={700}
+                                    fz="lg"
+                                    style={{
+                                        textAlign: 'left',
+                                        fontStyle: 'italic',
+                                        padding: '16px',
+                                        whiteSpace: 'nowrap',
+                                        position: 'sticky',
+                                        top: 0,
+                                        zIndex: 2,
+                                        backgroundColor: colors.headerBgColor,
+                                        boxShadow: `inset 0 -2px 0 0 ${colors.borderColor}, inset -1px 0 0 0 ${colors.borderColor}, inset 1px 0 0 0 ${colors.borderColor}, inset 0 2px 0 0 ${colors.borderColor}`,
+                                    }}
+                                >
+                                    {colName.label}
+                                </Table.Th>
+                            ))}
                         </Table.Tr>
                     </Table.Thead>
 
-
-                    {/* Body section */}
-                    <Table.Tbody style={{ border: '2px solid black' }}>
+                    <Table.Tbody style={{ border: `2px solid ${colors.borderColor}` }}>
                         {isLoading ? (
                             skeletonRows.map((_, rowIdx) => (
                                 <Table.Tr key={`skeleton-row-${rowIdx}`}>
@@ -91,44 +94,35 @@ export function GenericDataTable<T>({
                                             <Skeleton height={24} radius="sm" animate />
                                         </Table.Td>
                                     ))}
-                                    <Table.Td style={{ textAlign: 'center' }}>
-                                        <Group gap="xs" justify="center" wrap="nowrap">
-                                            <Skeleton height={28} width={28} circle />
-                                        </Group>
-                                    </Table.Td>
                                 </Table.Tr>
                             ))
                         ) : (
                             safeData.length === 0 ? (
-                                // Explicit Empty State UI
                                 <Table.Tr>
                                     <Table.Td colSpan={displayCols.length} style={{ textAlign: 'center', padding: '32px' }}>
                                         No records found.
                                     </Table.Td>
                                 </Table.Tr>
-                            ) : (safeData.map((row, rowIdx) => {
-                                return <Table.Tr key={rowIdx}>
-
+                            ) : (safeData.map((row, rowIdx) => (
+                                <Table.Tr key={rowIdx}>
                                     {showSerialNumber && (
                                         <Table.Td>{rowIdx + 1}</Table.Td>
                                     )}
-
-                                    {columns.map((tableCol, cellIdx) => {
-                                        return <Table.Td key={cellIdx} style={{
+                                    {columns.map((tableCol, cellIdx) => (
+                                        <Table.Td key={cellIdx} style={{
                                             padding: '16px', whiteSpace: 'nowrap',
                                             backgroundColor: tableCol.cellBgColor?.(row),
                                             color: tableCol.cellTextColor?.(row),
                                         }}>
                                             {tableCol.accessor(row)}
                                         </Table.Td>
-                                    })}
+                                    ))}
                                 </Table.Tr>
-                            }
-                            ))
+                            )))
                         )}
                     </Table.Tbody>
                 </Table>
             </ScrollArea>
-        </Box >
+        </Box>
     );
 }
