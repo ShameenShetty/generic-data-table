@@ -5,10 +5,10 @@
 <table style="width: 100%; border: none; background: transparent;">
   <tr>
     <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
-      <img src="./images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
+      <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
     </td>
     <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
-      <img src="./images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
+      <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
     </td>
   </tr>
   <tr>
@@ -27,7 +27,7 @@
 
 `GenericDataTable` features a fully configurable `theme` prop (`DataTableTheme`), allowing you to override default table colors, borders, and headers to match your application's design system.
 
-![Custom Theme GenericDataTable Example](./images/data-table-custom-theme-example.png)
+![Custom Theme GenericDataTable Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png)
 *Custom blue theme applied via the `theme` prop.*
 
 ```tsx
