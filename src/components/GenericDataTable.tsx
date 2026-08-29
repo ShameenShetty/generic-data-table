@@ -31,7 +31,7 @@ export function GenericDataTable<T>({
     const skeletonRows = Array(skeletonRowsCount).fill(null);
 
     return (
-        <Box mx="lg" my="md">
+        <Box>
             {tableName.length > 0 &&
                 <Center mb='sm'>
                     <Box

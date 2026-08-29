@@ -21,6 +21,21 @@
   </tr>
 </table>
 
+## Note
+*(Note: Ensure your host project has `@mantine/core`, `@mantine/hooks`, and `react` / `react-dom` installed as peer dependencies.)*
+
+> **IMPORTANT FOR VITE USERS:** If you encounter a `MantineProvider was not found` error when using this component in a Vite-powered application, you must exclude the package from Vite's pre-bundling optimization so it shares your app's React context:
+> ```ts
+> // vite.config.ts
+> export default defineConfig({
+>   optimizeDeps: {
+>     exclude: ['generic-data-table'],
+>   },
+> });
+> ```
+
+---
+
 ---
 
 ## Theming & Customization
@@ -31,33 +46,6 @@
 *Custom blue theme applied via the `theme` prop.*
 
 ```tsx
-import { GenericDataTable } from 'generic-data-table';
-import type { ColumnDefinition } from 'generic-data-table';
-
-interface UserRow {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-}
-
-const columns: ColumnDefinition<UserRow>[] = [
-  {
-    label: 'Name',
-    accessor: (row) => row.name,
-  },
-  {
-    label: 'Role',
-    accessor: (row) => row.role,
-  },
-  {
-    label: 'Status',
-    accessor: (row) => row.status,
-    // Optional per-cell styling example
-    cellBgColor: (row) => (row.status === 'Active' ? '#A4D5A6' : 'lightgrey'),
-  },
-];
-
 export function UserDirectoryTable({ data }: { data: UserRow[] }) {
   return (
     <GenericDataTable<UserRow>
@@ -79,28 +67,6 @@ export function UserDirectoryTable({ data }: { data: UserRow[] }) {
   );
 }
 ```
-
----
-
-## Installation
-
-```bash
-npm install generic-data-table
-# or
-pnpm add generic-data-table
-```
-
-*(Note: Ensure your host project has `@mantine/core`, `@mantine/hooks`, and `react` / `react-dom` installed as peer dependencies.)*
-
-> **IMPORTANT FOR VITE USERS:** If you encounter a `MantineProvider was not found` error when using this component in a Vite-powered application, you must exclude the package from Vite's pre-bundling optimization so it shares your app's React context:
-> ```ts
-> // vite.config.ts
-> export default defineConfig({
->   optimizeDeps: {
->     exclude: ['generic-data-table'],
->   },
-> });
-> ```
 
 ---
 
@@ -182,8 +148,8 @@ export function App() {
 ### `ColumnDefinition<T>`
 * `label`: `string` — Header text label.
 * `accessor`: `(item: T) => ReactNode` — Data accessor rendering cell contents.
-* `cellBgColor?: (item: T) => string \| undefined` — Dynamic background color resolver per cell.
-* `cellTextColor?: (item: T) => string \| undefined` — Dynamic text color resolver per cell.
+* `cellBgColor?: (item: T) => string | undefined` — Dynamic background color resolver per cell.
+* `cellTextColor?: (item: T) => string | undefined` — Dynamic text color resolver per cell.
 
 ---
 

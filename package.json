@@ -1,7 +1,7 @@
 {
   "name": "generic-data-table",
-  "version": "2.2.2",
-  "description": "Updated README to show images",
+  "version": "2.2.5",
+  "description": "Updated README",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
