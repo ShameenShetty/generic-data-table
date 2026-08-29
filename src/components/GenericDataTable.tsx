@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Center, Checkbox, Group, ScrollArea, Skeleton, Table, Title } from '@mantine/core';
+import { ActionIcon, Box, Center, Group, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
 import type { GenericDataTableProps } from '../types/table';
 import { useMemo } from 'react';
 
@@ -9,9 +9,10 @@ export function GenericDataTable<T>({
     showSerialNumber = false,
     isLoading = false,
     maxHeight,
-    theme = {}
+    theme = {},
+    tableActions = []
 }: GenericDataTableProps<T>) {
-    // Fallback theme tokens mapping to your current design defaults
+    // Fallback theme tokens mapping to current design defaults
     const colors = {
         titleBgColor: theme.titleBgColor ?? '#A67B5B',
         titleTextColor: theme.titleTextColor ?? '#212529',
@@ -23,8 +24,9 @@ export function GenericDataTable<T>({
 
     const displayCols = useMemo(() => [
         ...(showSerialNumber ? [{ label: 'SrNo', accessor: () => '' }] : []),
-        ...columns
-    ], [showSerialNumber, columns]);
+        ...columns,
+        ...(tableActions.length > 0 ? [{ label: '', accessor: () => '' }] : []),
+    ], [showSerialNumber, columns, tableActions.length]);
 
     const safeData = Array.isArray(data) ? data : [];
     const skeletonRowsCount = safeData.length > 0 ? safeData.length : 5;
@@ -105,11 +107,14 @@ export function GenericDataTable<T>({
                                 </Table.Tr>
                             ) : (safeData.map((row, rowIdx) => (
                                 <Table.Tr key={rowIdx}>
+                                    {/* Sr No */}
                                     {showSerialNumber && (
                                         <Table.Td>{rowIdx + 1}</Table.Td>
                                     )}
-                                    {columns.map((tableCol, cellIdx) => (
-                                        <Table.Td key={cellIdx} style={{
+
+                                    {/* Columns */}
+                                    {columns.map((tableCol, colIdx) => (
+                                        <Table.Td key={colIdx} style={{
                                             padding: '16px', whiteSpace: 'nowrap',
                                             backgroundColor: tableCol.cellBgColor?.(row),
                                             color: tableCol.cellTextColor?.(row),
@@ -117,6 +122,26 @@ export function GenericDataTable<T>({
                                             {tableCol.accessor(row)}
                                         </Table.Td>
                                     ))}
+
+                                    {/* Action Col */}
+                                    <Table.Td
+                                        w={tableActions.length * 10} style={{ whiteSpace: 'nowrap' }}
+                                    >
+                                        <Group gap="xs" justify="center" wrap="nowrap">
+                                            {tableActions.map((t, idx) => {
+                                                return (
+                                                    <Tooltip key={`action-${idx}`} label={t.tooltip} disabled={!t.tooltip}>
+                                                        <ActionIcon
+                                                            variant='subtle'
+                                                            onClick={() => t.onClick(safeData[rowIdx]!)}
+                                                        >
+                                                            {t.icon}
+                                                        </ActionIcon>
+                                                    </Tooltip>
+                                                )
+                                            })}
+                                        </Group>
+                                    </Table.Td>
                                 </Table.Tr>
                             )))
                         )}

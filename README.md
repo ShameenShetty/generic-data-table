@@ -36,44 +36,11 @@
 
 ---
 
----
-
-## Theming & Customization
-
-`GenericDataTable` features a fully configurable `theme` prop (`DataTableTheme`), allowing you to override default table colors, borders, and headers to match your application's design system.
-
-![Custom Theme GenericDataTable Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png)
-*Custom blue theme applied via the `theme` prop.*
-
-```tsx
-export function UserDirectoryTable({ data }: { data: UserRow[] }) {
-  return (
-    <GenericDataTable<UserRow>
-      tableName="User Directory"
-      data={data}
-      columns={columns}
-      showSerialNumber={true}
-      maxHeight={400}
-      isLoading={false}
-      theme={{
-        titleBgColor: '#3B82F6',
-        titleTextColor: '#FFFFFF',
-        headerBgColor: '#2563EB',
-        headerTextColor: '#FFFFFF',
-        borderColor: '#1E3A8A',
-        stripedBgColor: '#DBEAFE',
-      }}
-    />
-  );
-}
-```
-
----
-
-## Current Features (Basic Version)
+## Current Features (Version 2.3.0)
 
 * **Strict Type Safety:** Generic architecture (`<T>`) matching your data models seamlessly.
 * **Serial Number Integration:** Optional automatic index numbering column (`showSerialNumber`).
+* **Row Action Support:** Dedicated action column (`tableActions`) allowing row-level interactive buttons with built-in Mantine tooltips.
 * **Loading Skeletons:** Built-in animated skeleton rows activated via `isLoading`.
 * **Explicit Empty State:** Graceful fallback messaging when data arrays are empty.
 * **Cell Styling Hooks:** Custom per-cell background and text coloring via `cellBgColor` and `cellTextColor` accessor callbacks.
@@ -134,6 +101,95 @@ export function App() {
 
 ---
 
+## Theming & Customization
+
+`GenericDataTable` features a fully configurable `theme` prop (`DataTableTheme`), allowing you to override default table colors, borders, and headers to match your application's design system.
+
+![Custom Theme GenericDataTable Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png)
+*Custom blue theme applied via the `theme` prop.*
+
+```tsx
+export function UserDirectoryTable({ data }: { data: UserRow[] }) {
+  return (
+    <GenericDataTable<UserRow>
+      tableName="User Directory"
+      data={data}
+      columns={columns}
+      showSerialNumber={true}
+      maxHeight={400}
+      isLoading={false}
+      theme={{
+        titleBgColor: '#3B82F6',
+        titleTextColor: '#FFFFFF',
+        headerBgColor: '#2563EB',
+        headerTextColor: '#FFFFFF',
+        borderColor: '#1E3A8A',
+        stripedBgColor: '#DBEAFE',
+      }}
+    />
+  );
+}
+```
+
+---
+
+## Table Actions
+
+`GenericDataTable` supports a dedicated row-level action column via the `tableActions` prop. By supplying an array of `TableAction<T>` definitions, the component automatically creates a right-most action column populated with icon buttons and optional tooltips for each data row.
+
+| Standard Action View | Hover Tooltip Display | Action Interaction & Console Log |
+| :---: | :---: | :---: |
+| ![Table Action View 1](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-1.png) | ![Table Action View 2](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-2.png) | ![Table Action View 3](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png) |
+| *Action column automatically appends interactive icon buttons.* | *Mantine tooltips trigger dynamically on hover.* | *Row-specific click handlers passing payload data directly.* |
+
+### Implementation Example
+
+```tsx
+import { GenericDataTable, ColumnDefinition, TableAction } from 'generic-data-table';
+import { IconEdit, IconTrash, IconEye, IconQuestionMark } from '@tabler/icons-react';
+
+const genericTableActions: TableAction<UserRow>[] = [
+  {
+    icon: <IconEdit color="blue"/>,
+    tooltip: 'Testing',
+    onClick: (row) => console.log('Clicked on GenericEdit for row - ', row)
+  },
+  {
+    icon: <IconTrash color="red"/>,
+    tooltip: 'Delete a user',
+    onClick: (row) => console.log('Clicked on GenericDelete for row - ', row)
+  },
+  {
+    icon: <IconEye color="green"/>,
+    tooltip: 'View all user details',
+    onClick: (row) => console.log('Clicked on GenericView for row - ', row)
+  },
+  {
+    icon: <IconQuestionMark color="purple"/>,
+    tooltip: '',
+    onClick: (row) => console.log('Clicked on GenericQuestion for row - ', row)
+  },
+];
+
+export function App() {
+  return (
+    <>
+      <GenericDataTable<UserRow>
+        tableName="User Directory"
+        data={genericData}
+        columns={genericCols}
+        showSerialNumber={true}
+        maxHeight={400}
+        isLoading={false}
+        tableActions={genericTableActions}
+      />
+    </>
+  );
+}
+```
+
+---
+
 ## API Reference (`GenericDataTableProps`)
 
 | Prop Name | Type | Description |
@@ -144,6 +200,7 @@ export function App() {
 | `showSerialNumber` | `boolean` (optional) | Automatically prepends an incremental "SrNo" index column. |
 | `isLoading` | `boolean` (optional) | Toggles animated skeleton loader placeholders. |
 | `maxHeight` | `number \| string` (optional) | Sets the vertical scroll viewport ceiling via Mantine's `ScrollArea`. |
+| `tableActions` | `TableAction<T>[]` (optional) | Array of row action definitions, appending an interactive action column at the end. |
 
 ### `ColumnDefinition<T>`
 * `label`: `string` — Header text label.
@@ -151,13 +208,17 @@ export function App() {
 * `cellBgColor?: (item: T) => string | undefined` — Dynamic background color resolver per cell.
 * `cellTextColor?: (item: T) => string | undefined` — Dynamic text color resolver per cell.
 
+### `TableAction<T>`
+* `icon`: `React.ReactElement` — React element (such as an icon) rendered inside the button.
+* `tooltip?: string` — Optional hover text displaying a Mantine tooltip.
+* `onClick: (row: T) => void` — Callback handler triggered when clicked, passing the target row data.
+
 ---
 
 ## Roadmap & Planned Features
 
 ### 🚀 Coming Soon
 * **Row Interactivity:** `onRow` / `onRowsSelect` event handlers for selection and row-click workflows.
-* **Generic Action Column:** Built-in configuration slots for row-level buttons.
 * **Row Highlighting:** `getRowBgColor` prop for whole-row status coloring.
 
 ### 🗺️ Future Roadmap

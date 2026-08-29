@@ -1,8 +1,8 @@
-// Re-export components
 export { GenericDataTable } from './components/GenericDataTable';
 
-// Re-export type definitions for consumers
 export type {
     ColumnDefinition,
     GenericDataTableProps,
+    DataTableTheme,
+    TableAction,
 } from './types/table';
