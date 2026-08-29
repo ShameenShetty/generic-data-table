@@ -1,7 +1,7 @@
 {
   "name": "generic-data-table",
-  "version": "2.3.1",
-  "description": "Updated README",
+  "version": "2.3.2",
+  "description": "Fixed table col always showing bug. Updated images, README",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

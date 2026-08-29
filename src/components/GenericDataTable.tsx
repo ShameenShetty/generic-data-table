@@ -124,24 +124,24 @@ export function GenericDataTable<T>({
                                     ))}
 
                                     {/* Action Col */}
-                                    <Table.Td
-                                        w={tableActions.length * 10} style={{ whiteSpace: 'nowrap' }}
-                                    >
-                                        <Group gap="xs" justify="center" wrap="nowrap">
-                                            {tableActions.map((t, idx) => {
-                                                return (
-                                                    <Tooltip key={`action-${idx}`} label={t.tooltip} disabled={!t.tooltip}>
-                                                        <ActionIcon
-                                                            variant='subtle'
-                                                            onClick={() => t.onClick(safeData[rowIdx]!)}
-                                                        >
-                                                            {t.icon}
-                                                        </ActionIcon>
-                                                    </Tooltip>
-                                                )
-                                            })}
-                                        </Group>
-                                    </Table.Td>
+                                    {tableActions.length > 0 && (
+                                        <Table.Td style={{ whiteSpace: 'nowrap' }} >
+                                            <Group gap="xs" justify="center" wrap="nowrap">
+                                                {tableActions.map((t, idx) => {
+                                                    return (
+                                                        <Tooltip key={`action-${idx}`} label={t.tooltip} disabled={!t.tooltip}>
+                                                            <ActionIcon
+                                                                variant='subtle'
+                                                                onClick={() => t.onClick(safeData[rowIdx]!)}
+                                                            >
+                                                                {t.icon}
+                                                            </ActionIcon>
+                                                        </Tooltip>
+                                                    )
+                                                })}
+                                            </Group>
+                                        </Table.Td>
+                                    )}
                                 </Table.Tr>
                             )))
                         )}

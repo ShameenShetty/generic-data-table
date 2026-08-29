@@ -3,43 +3,88 @@
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
 <table style="width: 100%; border: none; background: transparent;">
+  <!-- ==================== ROW 1: Images 1 to 4 ==================== -->
   <tr>
+    <!-- Row 1, Cell 1: Default Table Example -->
     <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
-      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" target="_blank">
-        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
       </a>
     </td>
+    <!-- Row 1, Cell 2: Complex Colored Cells Example -->
     <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
-      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" target="_blank">
-        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/colored-cells.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/colored-cells.png" alt="Complex Cell Coloring Example" style="max-width: 100%; height: auto;" />
       </a>
     </td>
+    <!-- Row 1, Cell 3: Empty Title Example -->
     <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
-      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png" target="_blank">
-        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png" alt="Custom Theme Example" style="max-width: 100%; height: auto;" />
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
       </a>
     </td>
+    <!-- Row 1, Cell 4: Custom Theme Example -->
     <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
-      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png" target="_blank">
-        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png" alt="Table Action Example" style="max-width: 100%; height: auto;" />
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/custom-theme.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/custom-theme.png" alt="Custom Theme Example" style="max-width: 100%; height: auto;" />
       </a>
     </td>
   </tr>
+
+  <!-- ==================== ROW 1: Captions 1 to 4 ==================== -->
   <tr>
+    <!-- Row 1, Cell 1 Caption -->
     <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Default GenericDataTable example where we set custom table cell color according to Status value.
     </td>
+    <!-- Row 1, Cell 2 Caption -->
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
+      Example showing advanced cell coloring rules based on dynamic ranges.
+    </td>
+    <!-- Row 1, Cell 3 Caption -->
     <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Example of GenericDataTable when <code>titleName</code> is explicitly set to an empty string, removing the header container.
     </td>
+    <!-- Row 1, Cell 4 Caption -->
     <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Applying custom themes.
     </td>
+  </tr>
+
+  <!-- ==================== ROW 2: Images 5 (Table Actions) ==================== -->
+  <tr>
+    <!-- Row 2, Cell 1: Table Action Example -->
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px; padding-top: 20px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-3.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-3.png" alt="Table Action Example" style="max-width: 100%; height: auto;" />
+      </a>
+    </td>
+    <!-- Row 2, Cells 2 to 4 left blank for grid alignment -->
+    <td style="width: 25%;"></td>
+    <td style="width: 25%;"></td>
+    <td style="width: 25%;"></td>
+  </tr>
+
+  <!-- ==================== ROW 2: Captions 5 ==================== -->
+  <tr>
+    <!-- Row 2, Cell 1 Caption -->
     <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Add action column to perform operations on a particular row.
     </td>
+    <!-- Row 2, Cells 2 to 4 captions left blank -->
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
+
+## Table of Contents
+- [Current Features](#current-features-version-230)
+- [Quick Start Example](#quick-start-example)
+- [Theming & Customization](#theming--customization)
+- [Table Actions](#table-actions)
+- [API Reference](#api-reference-genericdatatableprops)
+- [Roadmap](#roadmap--planned-features)
 
 ## Note
 *(Note: Ensure your host project has `@mantine/core`, `@mantine/hooks`, and `react` / `react-dom` installed as peer dependencies.)*
@@ -125,8 +170,11 @@ export function App() {
 
 `GenericDataTable` features a fully configurable `theme` prop (`DataTableTheme`), allowing you to override default table colors, borders, and headers to match your application's design system.
 
-![Custom Theme GenericDataTable Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png)
+![Custom Theme GenericDataTable Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/custom-theme.png)
 *Custom blue theme applied via the `theme` prop.*
+
+<details>
+<summary><b>Click here to see example of applying a custom theme</b></summary>
 
 ```tsx
 export function UserDirectoryTable({ data }: { data: UserRow[] }) {
@@ -150,6 +198,7 @@ export function UserDirectoryTable({ data }: { data: UserRow[] }) {
   );
 }
 ```
+</details>
 
 ---
 
@@ -157,56 +206,136 @@ export function UserDirectoryTable({ data }: { data: UserRow[] }) {
 
 `GenericDataTable` supports a dedicated row-level action column via the `tableActions` prop. By supplying an array of `TableAction<T>` definitions, the component automatically creates a right-most action column populated with icon buttons and optional tooltips for each data row.
 
-| Standard Action View | Hover Tooltip Display | Action Interaction & Console Log |
-| :---: | :---: | :---: |
-| ![Table Action View 1](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-1.png) | ![Table Action View 2](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-2.png) | ![Table Action View 3](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png) |
-| *Action column automatically appends interactive icon buttons.* | *Mantine tooltips trigger dynamically on hover.* | *Row-specific click handlers passing payload data directly.* |
+| Hover Tooltip Display | Action Execution & Result |
+| :---: | :---: |
+| ![Table Action View 4](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-4.png) | ![Table Action View 5](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-5.png) |
+| *Hovering over the action icon displays the tooltip explaining the operation.* | *Clicking the action executes the handler, extracting the row's salary data to compute the estimated tax and net income in an alert prompt.* |
 
-### Implementation Example
+<details>
+<summary><b>Click here to see an example of implementing TableActions to perform state-driven operations on a selected row</b></summary>
 
 ```tsx
-import { GenericDataTable, ColumnDefinition, TableAction } from 'generic-data-table';
-import { IconEdit, IconTrash, IconEye, IconQuestionMark } from '@tabler/icons-react';
+import './App.css';
 
-const genericTableActions: TableAction<UserRow>[] = [
+import { Stack } from '@mantine/core';
+import { IconMail, IconReceipt2, IconTrash, IconTrendingUp, IconUsers } from '@tabler/icons-react';
+import { GenericDataTable } from './components/GenericDataTable';
+import type { ColumnDefinition, TableAction } from './types/table';
+
+interface DeveloperRow {
+  id: number;
+  name: string;
+  role: string;
+  status: 'Active' | 'Inactive';
+  salary: number;
+}
+
+const developerData: DeveloperRow[] = [
+  { id: 1, name: 'Alice Smith', role: 'Frontend Developer', status: 'Active', salary: 95000 },
+  { id: 2, name: 'Bob Jones', role: 'UI/UX Designer', status: 'Inactive', salary: 85000 },
+  { id: 3, name: 'Charlie Brown', role: 'QA Engineer', status: 'Active', salary: 90000 },
+  { id: 4, name: 'Diana Prince', role: 'Backend Developer', status: 'Active', salary: 110000 },
+  { id: 5, name: 'Evan Wright', role: 'DevOps Engineer', status: 'Inactive', salary: 115000 },
+  { id: 6, name: 'Fiona Gallagher', role: 'Frontend Developer', status: 'Active', salary: 98000 },
+  { id: 7, name: 'George Clark', role: 'Backend Developer', status: 'Active', salary: 105000 },
+  { id: 8, name: 'Hannah Abbott', role: 'UI/UX Designer', status: 'Active', salary: 88000 },
+  { id: 9, name: 'Ian Malcolm', role: 'QA Engineer', status: 'Inactive', salary: 92000 },
+  { id: 10, name: 'Julia Roberts', role: 'Frontend Developer', status: 'Active', salary: 102000 },
+  { id: 11, name: 'Kevin Hart', role: 'DevOps Engineer', status: 'Active', salary: 120000 },
+  { id: 12, name: 'Laura Croft', role: 'Backend Developer', status: 'Inactive', salary: 108000 },
+  { id: 13, name: 'Michael Scott', role: 'QA Engineer', status: 'Active', salary: 94000 },
+  { id: 14, name: 'Dwight Schrute', role: 'UI/UX Designer', status: 'Active', salary: 86000 },
+  { id: 15, name: 'Pam Beesly', role: 'DevOps Engineer', status: 'Active', salary: 112000 },
+];
+
+const developerCols: ColumnDefinition<DeveloperRow>[] = [
   {
-    icon: <IconEdit color="blue"/>,
-    tooltip: 'Testing',
-    onClick: (row) => console.log('Clicked on GenericEdit for row - ', row)
+    label: 'Name',
+    accessor: (row) => row.name,
   },
   {
-    icon: <IconTrash color="red"/>,
-    tooltip: 'Delete a user',
-    onClick: (row) => console.log('Clicked on GenericDelete for row - ', row)
+    label: 'Role',
+    accessor: (row) => row.role,
   },
   {
-    icon: <IconEye color="green"/>,
-    tooltip: 'View all user details',
-    onClick: (row) => console.log('Clicked on GenericView for row - ', row)
+    label: 'Status',
+    accessor: (row) => row.status,
+    cellBgColor: (row) => (row.status === 'Active' ? '#A4D5A6' : 'lightgrey'),
   },
   {
-    icon: <IconQuestionMark color="purple"/>,
-    tooltip: '',
-    onClick: (row) => console.log('Clicked on GenericQuestion for row - ', row)
+    label: 'Salary',
+    accessor: (row) => `$${row.salary.toLocaleString()}`,
+    cellBgColor: (row) => {
+      if (row.salary < 95000) return '#FFCCCC';   // Red (Low)
+      if (row.salary < 110000) return '#FFE5CC';  // Orange/Yellow (Medium-Low)
+      if (row.salary < 130000) return '#E5FFCC';  // Light Green (Medium-High)
+      return '#A4D5A6';                           // Green (High)
+    },
   },
 ];
 
-export function App() {
+const developerTableActions: TableAction<DeveloperRow>[] = [
+  {
+    icon: <IconReceipt2 color="blue"/>,
+    tooltip: 'Calculate Net Salary & Estimated Tax',
+    onClick: (row) => {
+      const estimatedTax = row.salary * 0.22;
+      const netSalary = row.salary - estimatedTax;
+      alert(`[Tax Breakdown for ${row.name}]\nGross:$${row.salary.toLocaleString()}\nEst. Tax (22%): $${estimatedTax.toLocaleString()}\nNet Income:$${netSalary.toLocaleString()}`);
+    }
+  },
+  {
+    icon: <IconUsers color="teal"/>,
+    tooltip: 'View Role Group Stats (Count & Avg Salary)',
+    onClick: (row) => {
+      const peers = developerData.filter((d) => d.role === row.role);
+      const avgSalary = peers.reduce((acc, curr) => acc + curr.salary, 0) / peers.length;
+      alert(`[Role Analytics: ${row.role}]\nTotal Employees in Role: ${peers.length}\nAverage Role Salary:$${Math.round(avgSalary).toLocaleString()}`);
+    }
+  },
+  {
+    icon: <IconTrendingUp color="green"/>,
+    tooltip: 'Evaluate Annual Bonus Eligibility',
+    onClick: (row) => {
+      const bonusMultiplier = row.status === 'Active' ? 0.15 : 0.05;
+      const projectedBonus = Math.round(row.salary * bonusMultiplier);
+      alert(`[Bonus Projection: ${row.name}]\nStatus:${row.status}\nEligible Bonus (${bonusMultiplier * 100}\%):$${projectedBonus.toLocaleString()}`);
+    }
+  },
+  {
+    icon: <IconMail color="purple"/>,
+    tooltip: 'Dispatch Performance Review Reminder',
+    onClick: (row) => {
+      alert(`Success: Automated performance review ping sent to ${row.name} (${row.role}).`);
+    }
+  },
+  {
+    icon: <IconTrash color="red"/>,
+    tooltip: 'Delete developer record',
+    onClick: (row) => {
+      console.log('Targeted for deletion:', row.id);
+    }
+  },
+];
+
+export default function App() {
   return (
-    <>
-      <GenericDataTable<UserRow>
-        tableName="User Directory"
-        data={genericData}
-        columns={genericCols}
+    <Stack>
+      <GenericDataTable<DeveloperRow>
+        tableName="Engineering Directory"
+        data={developerData}
+        columns={developerCols}
         showSerialNumber={true}
         maxHeight={400}
         isLoading={false}
-        tableActions={genericTableActions}
+        tableActions={developerTableActions}
       />
-    </>
+    </Stack>
   );
 }
 ```
+
+</details>
 
 ---
 
