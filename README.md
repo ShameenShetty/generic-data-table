@@ -1,4 +1,4 @@
-# GenericDataTable v2.3.1
+# GenericDataTable v2.3.2
 
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
