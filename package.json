@@ -1,7 +1,7 @@
 {
   "name": "generic-data-table",
-  "version": "2.3.0",
-  "description": "Added support for Action column + TableAction type. Updated README",
+  "version": "2.3.1",
+  "description": "Updated README",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

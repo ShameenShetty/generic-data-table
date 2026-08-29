@@ -1,22 +1,42 @@
-# GenericDataTable
+# GenericDataTable v2.3.1
 
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
 <table style="width: 100%; border: none; background: transparent;">
   <tr>
-    <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
-      <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-example.png" alt="Default GenericDataTable Example" style="max-width: 100%; height: auto;" />
+      </a>
     </td>
-    <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 10px;">
-      <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-empty-title-example.png" alt="GenericDataTable with Empty Title" style="max-width: 100%; height: auto;" />
+      </a>
+    </td>
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/data-table-custom-theme-example.png" alt="Custom Theme Example" style="max-width: 100%; height: auto;" />
+      </a>
+    </td>
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-example-3.png" alt="Table Action Example" style="max-width: 100%; height: auto;" />
+      </a>
     </td>
   </tr>
   <tr>
-    <td style="width: 50%; vertical-align: top; text-align: center; padding: 10px; font-style: italic;">
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Default GenericDataTable example where we set custom table cell color according to Status value.
     </td>
-    <td style="width: 50%; vertical-align: top; text-align: center; padding: 10px; font-style: italic;">
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Example of GenericDataTable when <code>titleName</code> is explicitly set to an empty string, removing the header container.
+    </td>
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
+      Applying custom themes.
+    </td>
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
+      Add action column to perform operations on a particular row.
     </td>
   </tr>
 </table>
