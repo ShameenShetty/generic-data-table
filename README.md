@@ -233,7 +233,7 @@ export default function App() {
     {
       label: 'Details',
       accessor: (row) => (
-        <Button onClick="{()" variant="light"> handleShowDetails(row)}>
+        <Button variant="light" onClick={() => handleShowDetails(row)}>
           Show more details
         </Button>
       ),
