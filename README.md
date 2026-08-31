@@ -1,4 +1,4 @@
-# GenericDataTable v2.3.2
+# GenericDataTable v2.4.1
 
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
@@ -431,9 +431,10 @@ export default function App() {
 ## Roadmap & Planned Features
 
 ### 🚀 Coming Soon
-* **Row Interactivity:** `onRow` / `onRowsSelect` event handlers for selection and row-click workflows.
+* **Flexible Summary Row:** Built-in column aggregations (`sum`, `count`, `avg`) alongside custom `renderSummary` slot support for composite metrics.
 
 ### 🗺️ Future Roadmap
-* **Native Table Export:** Integrated toolbar menu supporting direct Excel and PDF data exports.
-* **Client-Side Sorting:** Ascending and descending sort toggles per column header.
-* **Global Search & Filtering:** Built-in search input for real-time row filtering across data fields.
+* **Client-Side Sorting:** Ascending and descending sort toggles per column header with support for custom sort comparators.
+* **Global Search & Filtering:** Built-in search input for real-time row filtering with support for custom `filterFn` predicates.
+* **Native Table Export:** Integrated toolbar menu supporting direct CSV, Excel, and PDF data exports.
+* **Column Management:** Interactive dropdown menu for dynamic column visibility toggling (show/hide).
