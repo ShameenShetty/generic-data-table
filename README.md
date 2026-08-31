@@ -1,4 +1,4 @@
-# GenericDataTable v2.4.1
+# GenericDataTable
 
 `GenericDataTable` is a lightweight, type-safe data table component built on top of Mantine UI. Designed for clean modular display, it streamlines structured tabular data rendering with built-in loading skeletons, empty states, and cell-level color overrides.
 
@@ -108,12 +108,12 @@
 
 ---
 
-## Current Features (Version 2.4.2)
+## Current Features (Version 2.4.3)
 
 * **Strict Type Safety:** Generic architecture (`<T>`) matching your data models seamlessly.
 * **Serial Number Integration:** Optional automatic index numbering column (`showSerialNumber`).
-* <font color="#28a745">**Interactive Row Selection (New):** Checkbox selection system (`onRowSelect`, `onRowsSelect`) with an integrated "Select All" header toggle.</font>
-* <font color="#28a745">**Dynamic Row Highlighting (New):** Row-level background color styling (`rowBgColor`) driven by custom row data conditions.</font>
+* 🟢 **Interactive Row Selection (New):** Checkbox selection system (`onRowSelect`, `onRowsSelect`) with an integrated "Select All" header toggle.
+* 🟢 **Dynamic Row Highlighting (New):** Row-level background color styling (`rowBgColor`) driven by custom row data conditions.
 * **Row Action Support:** Generalized action column (`tableActions`) supporting custom icons, tooltips, and row-level callbacks.
 * **Cell Styling Hooks:** Custom per-cell background and text coloring via `cellBgColor` and `cellTextColor` accessor callbacks.
 * **Loading Skeletons:** Built-in animated skeleton rows activated via `isLoading`.
