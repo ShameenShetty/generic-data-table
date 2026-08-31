@@ -85,7 +85,7 @@
 </table>
 
 ## Table of Contents
-- [Current Features](#current-features-version-230)
+- [Current Features](#current-features-version-242)
 - [Quick Start Example](#quick-start-example)
 - [Theming & Customization](#theming--customization)
 - [Table Actions](#table-actions)
@@ -108,14 +108,16 @@
 
 ---
 
-## Current Features (Version 2.3.0)
+## Current Features (Version 2.4.2)
 
 * **Strict Type Safety:** Generic architecture (`<T>`) matching your data models seamlessly.
 * **Serial Number Integration:** Optional automatic index numbering column (`showSerialNumber`).
-* **Row Action Support:** Dedicated action column (`tableActions`) allowing row-level interactive buttons with built-in Mantine tooltips.
+* <font color="#28a745">**Interactive Row Selection (New):** Checkbox selection system (`onRowSelect`, `onRowsSelect`) with an integrated "Select All" header toggle.</font>
+* <font color="#28a745">**Dynamic Row Highlighting (New):** Row-level background color styling (`rowBgColor`) driven by custom row data conditions.</font>
+* **Row Action Support:** Generalized action column (`tableActions`) supporting custom icons, tooltips, and row-level callbacks.
+* **Cell Styling Hooks:** Custom per-cell background and text coloring via `cellBgColor` and `cellTextColor` accessor callbacks.
 * **Loading Skeletons:** Built-in animated skeleton rows activated via `isLoading`.
 * **Explicit Empty State:** Graceful fallback messaging when data arrays are empty.
-* **Cell Styling Hooks:** Custom per-cell background and text coloring via `cellBgColor` and `cellTextColor` accessor callbacks.
 * **Sticky Header & Scroll Area:** Scrollable container with fixed table headers for large datasets.
 
 ---

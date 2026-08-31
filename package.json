@@ -1,7 +1,7 @@
 {
   "name": "generic-data-table",
-  "version": "2.4.1",
-  "description": "Added functionality to change bg color for an entire row. Added functionality for selecting a single row or multiple rows",
+  "version": "2.4.2",
+  "description": "README update",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
