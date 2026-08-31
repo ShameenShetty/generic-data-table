@@ -1,8 +1,10 @@
-import { ActionIcon, Box, Center, Checkbox, Group, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
-import type { GenericDataTableProps } from '../types/table';
+import { ActionIcon, Box, Center, Checkbox, Group, Menu, MenuDropdown, MenuTarget, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
+import { IconDatabaseExport, IconMenu2 } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
+import type { GenericDataTableProps } from '../types/table';
+import { exportToCSV } from '../utils/export_data';
 
-export function GenericDataTable<T>({
+export function GenericDataTable<T extends object>({
     tableName = '',
     rowKey,
     columns,
@@ -31,7 +33,7 @@ export function GenericDataTable<T>({
 
     const displayCols = useMemo(() => [
         ...(hasSelection ? [{ label: '', accessor: () => '' }] : []),
-        ...(showSerialNumber ? [{ label: 'SrNo', accessor: () => '' }] : []),
+        ...(showSerialNumber ? [{ label: '#', accessor: () => '' }] : []),
         ...columns,
         ...(tableActions.length > 0 ? [{ label: '', accessor: () => '' }] : []),
     ], [hasSelection, showSerialNumber, columns, tableActions.length]);
@@ -93,9 +95,36 @@ export function GenericDataTable<T>({
                             boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                         }}
                     >
-                        <Title order={2} c={colors.titleTextColor} style={{ fontWeight: 700, letterSpacing: '0.5px' }}>
-                            {tableName}
-                        </Title>
+                        {/* Table name card */}
+                        <Box
+                            style={{
+                                backgroundColor: colors.titleBgColor,
+                                padding: '12px 22px',
+                                borderRadius: '16px',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                            }}
+                        >
+                            <Group>
+                                <Title order={2} c={colors.titleTextColor} style={{ fontWeight: 700, letterSpacing: '0.5px' }}>
+                                    {tableName}
+                                </Title>
+
+                                {/* Table Card Dropdown menu */}
+                                <ActionIcon variant='subtle'>
+                                    <Menu>
+                                        <MenuTarget><IconMenu2 color={colors.headerTextColor} /></MenuTarget>
+                                        <MenuDropdown>
+                                            <Menu.Label>Export data</Menu.Label>
+                                            <Menu.Item
+                                                onClick={() => exportToCSV<T>(safeData, tableName)}
+                                                leftSection={<IconDatabaseExport />}>
+                                                Export as CSV
+                                            </Menu.Item>
+                                        </MenuDropdown>
+                                    </Menu>
+                                </ActionIcon>
+                            </Group>
+                        </Box>
                     </Box>
                 </Center>
             }
