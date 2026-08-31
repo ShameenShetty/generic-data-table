@@ -1,7 +1,10 @@
 export const exportToCSV = <T extends object>(data: T[], filename: string) => {
   if (!data.length) return;
 
-  const headers = Object.keys(data[0]).join(',');
+  const firstRow = data[0];
+  if (!firstRow) return;
+
+  const headers = Object.keys(firstRow).join(',');
   const rows = data.map(row =>
     Object.values(row)
       .map(val => `"${String(val ?? '').replace(/"/g, '""')}"`) // Escape quotes & wrap string
