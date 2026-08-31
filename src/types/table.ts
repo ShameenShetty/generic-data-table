@@ -7,12 +7,20 @@ export interface ColumnDefinition<T> {
 
 export interface GenericDataTableProps<T> {
     tableName: string;
+    rowKey: keyof T | ((row: T) => string | number);
+    
     columns: ColumnDefinition<T>[];
     data: T[];
+    
     showSerialNumber?: boolean;
     isLoading?: boolean;
     maxHeight?: number;
+    
     theme?: DataTableTheme;
+    rowBgColor?: (row: T) => string;
+    
+    onRowSelect?: (row: T) => void;
+    onRowsSelect?: (rows: T[]) => void;
     tableActions?: TableAction<T>[];
 }
 

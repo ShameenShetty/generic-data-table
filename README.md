@@ -51,16 +51,20 @@
     </td>
   </tr>
 
-  <!-- ==================== ROW 2: Images 5 (Table Actions) ==================== -->
+  <!-- ==================== ROW 2: Images 5 ==================== -->
   <tr>
     <!-- Row 2, Cell 1: Table Action Example -->
     <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px; padding-top: 20px;">
       <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-3.png" target="_blank">
         <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/table-action-3.png" alt="Table Action Example" style="max-width: 100%; height: auto;" />
       </a>
+    </td>    
+    <!-- Row 2, Cell 2: onRowsSelect Example -->
+    <td style="width: 25%; vertical-align: bottom; text-align: center; padding: 5px; padding-top: 20px;">
+      <a href="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/on-rows-select.png" target="_blank">
+        <img src="https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/on-rows-select.png" alt="onRowsSelect Example" style="max-width: 100%; height: auto;" />
+      </a>
     </td>
-    <!-- Row 2, Cells 2 to 4 left blank for grid alignment -->
-    <td style="width: 25%;"></td>
     <td style="width: 25%;"></td>
     <td style="width: 25%;"></td>
   </tr>
@@ -71,8 +75,10 @@
     <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
       Add action column to perform operations on a particular row.
     </td>
-    <!-- Row 2, Cells 2 to 4 captions left blank -->
-    <td></td>
+    <!-- Row 2, Cell 2 Caption -->
+    <td style="width: 25%; vertical-align: top; text-align: center; padding: 5px; font-style: italic; font-size: 0.85em;">
+      onRowsSelect allows performing actions on multiple selected rows
+    </td>
     <td></td>
     <td></td>
   </tr>
@@ -83,6 +89,7 @@
 - [Quick Start Example](#quick-start-example)
 - [Theming & Customization](#theming--customization)
 - [Table Actions](#table-actions)
+- [onRowSelect & onRowsSelect](#row-selection)
 - [API Reference](#api-reference-genericdatatableprops)
 - [Roadmap](#roadmap--planned-features)
 
@@ -339,6 +346,63 @@ export default function App() {
 
 ---
 
+## Row Selection
+
+`GenericDataTable` supports built-in row selection features via the `onRowSelect` (single row) and `onRowsSelect` (multiple rows) props. Adding either prop automatically injects a selection column filled with checkboxes at the very beginning of the table. For multi-row selection, the header cell includes a master toggle checkbox to select or deselect all visible rows simultaneously.
+
+| Multi-Row Selection Callback | Toggle All Rows |
+| :---: | :---: |
+| ![On Rows Select Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/on-rows-select.png) | ![On Rows Select Toggle All Example](https://raw.githubusercontent.com/ShameenShetty/generic-data-table/refs/heads/main/images/on-rows-select-toggle-all.png) |
+| *Selecting multiple rows individually triggers the callback consecutively with updated selected payload values.* | *Toggling the master header checkbox selects all rows at once and passes the complete dataset to the selection callback.* |
+
+<details>
+<summary><b>Click here to see an example of implementing row selection and handling multi-row callbacks</b></summary>
+
+```tsx
+import { Stack } from '@mantine/core';
+import { GenericDataTable } from './components/GenericDataTable';
+import type { ColumnDefinition, TableAction } from './types/table';
+
+interface DeveloperRow {
+  id: number;
+  name: string;
+  role: string;
+  status: 'Active' | 'Inactive';
+  salary: number;
+}
+
+const calculateTotalSalary = (rows: DeveloperRow[]) => {
+  const result = rows.reduce((acc, curr) => {
+    acc.totalSalary += curr.salary;
+    return acc;
+  }, { totalSalary: 0 });
+
+  return result.totalSalary;
+}
+
+export default function App() {
+  return (
+    <Stack>
+      <GenericDataTable<DeveloperRow>
+        tableName="Engineering Directory"
+        rowKey={'id'}
+        data={developerData}
+        columns={developerCols}
+        showSerialNumber={true}
+        maxHeight={400}
+        isLoading={false}
+        rowBgColor={(row) => (row.status === 'Active' ? 'green.2' : 'red.2')}
+        onRowsSelect={(rows) => console.log(`${rows.length} users combined salary - ${calculateTotalSalary(rows)}`)}
+        tableActions={developerTableActions}
+      />
+    </Stack>
+  );
+}
+```
+</details>
+
+---
+
 ## API Reference (`GenericDataTableProps`)
 
 | Prop Name | Type | Description |
@@ -368,7 +432,6 @@ export default function App() {
 
 ### 🚀 Coming Soon
 * **Row Interactivity:** `onRow` / `onRowsSelect` event handlers for selection and row-click workflows.
-* **Row Highlighting:** `getRowBgColor` prop for whole-row status coloring.
 
 ### 🗺️ Future Roadmap
 * **Native Table Export:** Integrated toolbar menu supporting direct Excel and PDF data exports.

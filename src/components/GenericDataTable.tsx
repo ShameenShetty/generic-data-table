@@ -1,15 +1,19 @@
-import { ActionIcon, Box, Center, Group, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, Box, Center, Checkbox, Group, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
 import type { GenericDataTableProps } from '../types/table';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export function GenericDataTable<T>({
-    data,
-    columns,
     tableName = '',
+    rowKey,
+    columns,
+    data,
     showSerialNumber = false,
     isLoading = false,
     maxHeight,
     theme = {},
+    rowBgColor,
+    onRowSelect,
+    onRowsSelect,
     tableActions = []
 }: GenericDataTableProps<T>) {
     // Fallback theme tokens mapping to current design defaults
@@ -22,15 +26,60 @@ export function GenericDataTable<T>({
         stripedBgColor: theme.stripedBgColor ?? '#CFB595',
     };
 
+    const hasSelection = Boolean(onRowSelect || onRowsSelect);
+    const [selectedIds, setSelectedIds] = useState<Set<string | number>>(new Set());
+
     const displayCols = useMemo(() => [
+        ...(hasSelection ? [{ label: '', accessor: () => '' }] : []),
         ...(showSerialNumber ? [{ label: 'SrNo', accessor: () => '' }] : []),
         ...columns,
         ...(tableActions.length > 0 ? [{ label: '', accessor: () => '' }] : []),
-    ], [showSerialNumber, columns, tableActions.length]);
+    ], [hasSelection, showSerialNumber, columns, tableActions.length]);
 
     const safeData = Array.isArray(data) ? data : [];
     const skeletonRowsCount = safeData.length > 0 ? safeData.length : 5;
     const skeletonRows = Array(skeletonRowsCount).fill(null);
+
+    const getRowId = (row: T): string | number => {
+        if (typeof rowKey === 'function') {
+            return rowKey(row);
+        }
+        return row[rowKey] as unknown as string | number;
+    };
+
+    // Handle individual row checkbox toggle
+    const handleToggleRow = (row: T, checked: boolean) => {
+        const id = getRowId(row);
+        const newSet = new Set(selectedIds);
+
+        if (checked) {
+            if (onRowSelect) newSet.clear();
+            newSet.add(id);
+        } else {
+            newSet.delete(id);
+        }
+
+        setSelectedIds(newSet);
+
+        // Trigger callbacks
+        onRowSelect?.(row);
+
+        if (onRowsSelect) {
+            const selectedRows = safeData.filter((item) => newSet.has(getRowId(item)));
+            onRowsSelect(selectedRows);
+        }
+    };
+
+    const handleToggleAll = (checked: boolean) => {
+        if (checked) {
+            const allIds = new Set(data.map((row) => getRowId(row)));
+            setSelectedIds(allIds);
+            onRowsSelect?.(data);
+        } else {
+            setSelectedIds(new Set());
+            onRowsSelect?.([]);
+        }
+    };
 
     return (
         <Box>
@@ -81,17 +130,24 @@ export function GenericDataTable<T>({
                                         boxShadow: `inset 0 -2px 0 0 ${colors.borderColor}, inset -1px 0 0 0 ${colors.borderColor}, inset 1px 0 0 0 ${colors.borderColor}, inset 0 2px 0 0 ${colors.borderColor}`,
                                     }}
                                 >
-                                    {colName.label}
+                                    {(onRowsSelect && index === 0) ?
+                                        // Header checkbox
+                                        <Checkbox
+                                            checked={safeData.length !== 0 && safeData.length === selectedIds.size}
+                                            onChange={(event) => handleToggleAll(event.target.checked)}
+                                        /> :
+                                        colName.label}
                                 </Table.Th>
                             ))}
                         </Table.Tr>
                     </Table.Thead>
 
                     <Table.Tbody style={{ border: `2px solid ${colors.borderColor}` }}>
+                        {/* Skeleton */}
                         {isLoading ? (
                             skeletonRows.map((_, rowIdx) => (
                                 <Table.Tr key={`skeleton-row-${rowIdx}`}>
-                                    {columns.map((_, colIdx) => (
+                                    {displayCols.map((_, colIdx) => (
                                         <Table.Td key={`skeleton-cell-${colIdx}`} style={{ padding: '16px' }}>
                                             <Skeleton height={24} radius="sm" animate />
                                         </Table.Td>
@@ -101,13 +157,24 @@ export function GenericDataTable<T>({
                         ) : (
                             safeData.length === 0 ? (
                                 <Table.Tr>
-                                    <Table.Td colSpan={displayCols.length} style={{ textAlign: 'center', padding: '32px' }}>
+                                    <Table.Td colSpan={displayCols.length}
+                                        style={{ textAlign: 'center', padding: '32px' }}>
                                         No records found.
                                     </Table.Td>
                                 </Table.Tr>
                             ) : (safeData.map((row, rowIdx) => (
-                                <Table.Tr key={rowIdx}>
-                                    {/* Sr No */}
+                                <Table.Tr key={rowIdx} bg={rowBgColor?.(row) || ''}>
+                                    {/* Selection col / Checkbox col */}
+                                    {hasSelection && (
+                                        <Table.Td>
+                                            <Checkbox
+                                                checked={selectedIds.has(getRowId(row))}
+                                                onChange={(e) => handleToggleRow(row, e.currentTarget.checked)}
+                                            />
+                                        </Table.Td>
+                                    )}
+
+                                    {/* Sr No col */}
                                     {showSerialNumber && (
                                         <Table.Td>{rowIdx + 1}</Table.Td>
                                     )}
@@ -123,9 +190,9 @@ export function GenericDataTable<T>({
                                         </Table.Td>
                                     ))}
 
-                                    {/* Action Col */}
+                                    {/* Action col */}
                                     {tableActions.length > 0 && (
-                                        <Table.Td style={{ whiteSpace: 'nowrap' }} >
+                                        <Table.Td width={10} style={{ whiteSpace: 'nowrap' }} >
                                             <Group gap="xs" justify="center" wrap="nowrap">
                                                 {tableActions.map((t, idx) => {
                                                     return (
