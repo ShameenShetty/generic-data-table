@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@tabler/icons-react':
-        specifier: ^3.46.0
-        version: 3.46.0(react@19.2.8)
     devDependencies:
       '@mantine/core':
         specifier: ^7.0.0
@@ -386,14 +382,6 @@ packages:
     resolution: {integrity: sha512-/gDJaRs4gl0NPIwqCz+6PkpmhhjRAD2j6P4rSNHBzUkO3naEx2mIU0pRle1vUNRQ7mE/+8OOeXLTv/J56FKiQg==}
     cpu: [x64]
     os: [win32]
-
-  '@tabler/icons-react@3.46.0':
-    resolution: {integrity: sha512-CCm7xJWhDT2PH4ZIFkP6AgYKtVhq0gpYkjUN+GVh1AzmIQaa77OW0bQPBPQiTE0PsXMR9oSxFqA3qBglzPyrVQ==}
-    peerDependencies:
-      react: '>= 16'
-
-  '@tabler/icons@3.46.0':
-    resolution: {integrity: sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==}
 
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
@@ -942,13 +930,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.62.5':
     optional: true
-
-  '@tabler/icons-react@3.46.0(react@19.2.8)':
-    dependencies:
-      '@tabler/icons': 3.46.0
-      react: 19.2.8
-
-  '@tabler/icons@3.46.0': {}
 
   '@types/estree@1.0.9': {}
 

@@ -95,7 +95,7 @@
 </table>
 
 ## Table of Contents
-- [Current Features](#current-features-version-250)
+- [Current Features](#current-features-version-251)
 - [Quick Start Example](#quick-start-example)
 - [Custom Cell Components](#custom-cell-components)
 - [Theming & Customization](#theming--customization)
@@ -119,7 +119,7 @@
 
 ---
 
-## Current Features (Version 2.5.0)
+## Current Features (Version 2.5.1)
 
 * **Strict Type Safety:** Generic architecture (`<T>`) matching your data models seamlessly.
 * **Serial Number Integration:** Optional automatic index numbering column (`showSerialNumber`).

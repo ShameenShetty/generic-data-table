@@ -1,5 +1,5 @@
 import { ActionIcon, Box, Center, Checkbox, Group, Menu, MenuDropdown, MenuTarget, ScrollArea, Skeleton, Table, Title, Tooltip } from '@mantine/core';
-import { IconDatabaseExport, IconMenu2 } from '@tabler/icons-react';
+import { DatabaseExportIcon, MenuIcon } from '../components/Icons';
 import { useMemo, useState } from 'react';
 import type { GenericDataTableProps } from '../types/table';
 import { exportToCSV } from '../utils/export_data';
@@ -92,7 +92,6 @@ export function GenericDataTable<T extends object>({
                             backgroundColor: colors.titleBgColor,
                             padding: '12px 22px',
                             borderRadius: '16px',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                         }}
                     >
                         {/* Table name card */}
@@ -101,10 +100,9 @@ export function GenericDataTable<T extends object>({
                                 backgroundColor: colors.titleBgColor,
                                 padding: '12px 22px',
                                 borderRadius: '16px',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                             }}
                         >
-                            <Group>
+                            <Group align='center'>
                                 <Title order={2} c={colors.titleTextColor} style={{ fontWeight: 700, letterSpacing: '0.5px' }}>
                                     {tableName}
                                 </Title>
@@ -112,12 +110,12 @@ export function GenericDataTable<T extends object>({
                                 {/* Table Card Dropdown menu */}
                                 <ActionIcon variant='subtle'>
                                     <Menu>
-                                        <MenuTarget><IconMenu2 color={colors.headerTextColor} /></MenuTarget>
+                                        <MenuTarget><MenuIcon color={colors.headerTextColor} size={24} /></MenuTarget>
                                         <MenuDropdown>
                                             <Menu.Label>Export data</Menu.Label>
                                             <Menu.Item
                                                 onClick={() => exportToCSV<T>(safeData, tableName)}
-                                                leftSection={<IconDatabaseExport />}>
+                                                leftSection={<DatabaseExportIcon />}>
                                                 Export as CSV
                                             </Menu.Item>
                                         </MenuDropdown>

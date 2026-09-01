@@ -1,6 +1,6 @@
 {
   "name": "generic-data-table",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "README update",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -33,9 +33,6 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tsup": "^8.5.1",
-    "typescript": "~5.9.3"
-  },
-  "dependencies": {
-    "@tabler/icons-react": "^3.46.0"
+    "typescript": "~6.0.2"
   }
 }
