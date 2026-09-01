@@ -554,10 +554,9 @@ export default function App() {
 ## Roadmap & Planned Features
 
 ### 🚀 Coming Soon
-* **Flexible Summary Row:** Built-in column aggregations (`sum`, `count`, `avg`) alongside custom `renderSummary` slot support for composite metrics.
+* **Flexible Summary Row:** Built-in column aggregations (`sum`, `count`, `avg`).
 
 ### 🗺️ Future Roadmap
 * **Client-Side Sorting:** Ascending and descending sort toggles per column header with support for custom sort comparators.
 * **Global Search & Filtering:** Built-in search input for real-time row filtering with support for custom `filterFn` predicates.
-* **Native Table Export:** Integrated toolbar menu supporting direct CSV, Excel, and PDF data exports.
 * **Column Management:** Interactive dropdown menu for dynamic column visibility toggling (show/hide).

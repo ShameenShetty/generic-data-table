@@ -1,3 +1,7 @@
+// TODO
+// Should use array ColumnDefinition to get the headers and the data, otherwise
+// we end up printing the entire object instead of the specific columns shown
+// in the table.
 export const exportToCSV = <T extends object>(data: T[], filename: string) => {
   if (!data.length) return;
 

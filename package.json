@@ -1,7 +1,7 @@
 {
   "name": "generic-data-table",
   "version": "2.5.1",
-  "description": "README update",
+  "description": "Removed depdency for Tabler",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
